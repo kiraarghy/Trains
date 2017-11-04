@@ -1,17 +1,18 @@
 import React, { Component } from "react";
 
+import TrainContainer from './TrainContainer'
+
 class TrainsView extends Component {
   render() {
-    var Services = this.props.services.map(
-      (service, key = this.props.services.serviceIdentifier) => {
+    var trainServices = this.props.services.map(
+      (service) => {
+        if (service.transportMode !== "TRAIN") {return null}
         return (
-          <div>
-            {service.serviceIdentifier}
-          </div>
+          <TrainContainer key={service.serviceIdentifier} service ={service}/>
         );
       }
     );
-    return <div>{Services}</div>;
+    return <div>{trainServices}</div>;
   }
 }
 
