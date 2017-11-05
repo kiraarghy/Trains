@@ -1,20 +1,20 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 
-import TrainContainer from './TrainContainer'
+import TrainContainer from "./TrainContainer";
 
-const ServicesWrapper = styled.div`padding: 3%;`
+const ServicesWrapper = styled.div`padding: 3%;`;
 
 class TrainsView extends Component {
   render() {
-    var trainServices = this.props.services.map(
-      (service) => {
-        if (service.transportMode !== "TRAIN") {return null}
-        return (
-          <TrainContainer key={service.serviceIdentifier} service ={service}/>
-        );
+    var trainServices = this.props.services.map(service => {
+      if (service.transportMode !== "TRAIN") {
+        return null;
       }
-    );
+      return (
+        <TrainContainer key={service.serviceIdentifier} service={service} handleClickOnService={this.props.handleClickOnService}/>
+      );
+    });
     return <ServicesWrapper>{trainServices}</ServicesWrapper>;
   }
 }
