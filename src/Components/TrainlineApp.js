@@ -10,12 +10,14 @@ const AppWrapper = styled.div`
 `;
 
 const TrainViewWrapper = styled.div`
-  transform: translateX(${props => props.TrainsViewActive ? '0%' : '-100%'});
+
+  transform: translateX(${props => (props.TrainsViewActive ? "0%" : "-100%")});
   width: 100%;
   transition: transform 300ms ease-in;
 `;
 const JourneyViewWrapper = styled.div`
-  transform: translateX(${props => props.TrainsViewActive ? '-100%' : '0%'});
+  position: fixed;
+  transform: translateX(${props => (props.TrainsViewActive ? "-100%" : "0%")});
   width: 100%;
   transition: transform 300ms ease-in;
 `;
@@ -25,7 +27,7 @@ const urlForServiceAPICall = "https://realtime.thetrainline.com/departures/wat";
 class TrainlineApp extends Component {
   state = {
     currentlySelectedService: "",
-    TrainsViewActive: true,
+    TrainsViewActive: true
   };
   componentDidMount() {
     fetch(urlForServiceAPICall)
@@ -38,7 +40,10 @@ class TrainlineApp extends Component {
   //Chose to fetch from API every 30s. Not sure if this is the best timing but can be changed to suit the user.
   //The API functions could be refactored but not enough time ATM, will do so if I have time available later.
 
-  apiServiceRefreshDispatcher = () =>{ setTimeout(this.apiServiceRefresh, 30000); return null;}
+  apiServiceRefreshDispatcher = () => {
+    setTimeout(this.apiServiceRefresh, 30000);
+    return null;
+  };
 
   apiServiceRefresh = () => {
     fetch(urlForServiceAPICall)
@@ -48,7 +53,10 @@ class TrainlineApp extends Component {
       });
   };
 
-  apiJourneyRefreshDispatcher = () => {setTimeout(this.apiJourneyRefresh, 3000); return null;}
+  apiJourneyRefreshDispatcher = () => {
+    setTimeout(this.apiJourneyRefresh, 8000);
+    return null;
+  };
 
   apiJourneyRefresh = () => {
     if (this.state.currentlySelectedService !== "") {
@@ -70,7 +78,10 @@ class TrainlineApp extends Component {
       console.error("Service Identifier is null");
     }
     let selectedService = serviceID;
-    this.setState({ currentlySelectedService: selectedService, TrainsViewActive: false })
+    this.setState({
+      currentlySelectedService: selectedService,
+      TrainsViewActive: false
+    });
     return null;
   };
 

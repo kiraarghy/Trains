@@ -41,12 +41,8 @@ const OnTimeService = SubContent.extend`color: green;`;
 class TrainContainer extends Component {
   onTimeCalculator = () => {
     let service = this.props.service;
-    let realTime = service.realTimeUpdatesInfo.realTimeServiceInfo.realTime.substr(
-      11,
-      5
-    );
     let scheduledTime = service.scheduledInfo.scheduledTime.substr(11, 5);
-    if (service.realTimeUpdatesInfo.realTimeServiceInfo === undefined || realTime === "00:00") {
+    if (service.realTimeUpdatesInfo.realTimeServiceInfo === undefined) {
       if (service.realTimeUpdatesInfo.delayReason !== undefined) {
         return <DelayedService>Delayed</DelayedService>;
       }
@@ -54,6 +50,13 @@ class TrainContainer extends Component {
         "There was no realTimeUpdatesInfo returned for service: " +
           service.serviceIdentifier
       );
+      return <DelayedService>No ETA</DelayedService>;
+    }
+    let realTime = service.realTimeUpdatesInfo.realTimeServiceInfo.realTime.substr(
+      11,
+      5
+    );
+    if (realTime === "00:00") {
       return <DelayedService>No ETA</DelayedService>;
     }
     if (realTime === scheduledTime) {
@@ -77,8 +80,21 @@ class TrainContainer extends Component {
           <div>Plat. {this.props.service.scheduledInfo.scheduledPlatform}</div>
           <div>{this.onTimeCalculator()}</div>
         </PlatAndOnTimeWrapper>
-        <ButtonWrapper onClick = {() => this.props.handleClickOnService(this.props.service.serviceIdentifier)}>
-          <Arrow role='img'arial-label={'Click here for the ' + this.props.service.scheduledInfo.scheduledTime.substr(11, 5) + ' to ' + this.props.service.destinationList[0].crs}/>
+        <ButtonWrapper
+          onClick={() =>
+            this.props.handleClickOnService(
+              this.props.service.serviceIdentifier
+            )}
+        >
+          <Arrow
+            role="img"
+            arial-label={
+              "Click here for the " +
+              this.props.service.scheduledInfo.scheduledTime.substr(11, 5) +
+              " to " +
+              this.props.service.destinationList[0].crs
+            }
+          />
         </ButtonWrapper>
       </TrainWrapper>
     );

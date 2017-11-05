@@ -7,7 +7,24 @@ class JourneyView extends Component {
     if (this.props.journeyData === undefined) {
       return <div>Loading...</div>;
     }
-    return <StopWrapper journeyData={this.props.journeyData} />;
+    return (
+      <div>
+        <div>
+          {this.props.journeyData.service !== undefined
+            ? this.props.journeyData.service.serviceOrigins[0]
+            : null}
+        </div>{" "}
+        To
+        <div>
+          {this.props.journeyData.service !== undefined
+            ? this.props.journeyData.service.serviceDestinations[0]
+            : null}
+        </div>
+        <div>{this.props.journeyData.service !== undefined
+            ? this.props.journeyData.service.serviceOperator: null}</div>
+        <StopWrapper journeyData={this.props.journeyData} />
+      </div>
+    );
   };
   render() {
     return (
@@ -15,7 +32,6 @@ class JourneyView extends Component {
         <button onClick={() => this.props.handleCloseJourneyView()}>
           Boop
         </button>
-        <span>🚆</span>
         {this.doesJourneyDataExist()}
       </div>
     );
