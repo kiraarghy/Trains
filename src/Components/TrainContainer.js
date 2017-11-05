@@ -27,6 +27,7 @@ const ButtonWrapper = styled.button`
 const Arrow = styled.div`
   height: 15px;
   width: 15px;
+  outline-style: none;
   border: 1px solid black;
   border-width: 2px 2px 0 0;
   transform: rotate(45deg);
@@ -76,8 +77,8 @@ class TrainContainer extends Component {
           <div>Plat. {this.props.service.scheduledInfo.scheduledPlatform}</div>
           <div>{this.onTimeCalculator()}</div>
         </PlatAndOnTimeWrapper>
-        <ButtonWrapper onClick = {() => this.props.handleClickOnService(this.props.service.serviceIdentifier)} name={'Click here for the ' + this.props.service.scheduledInfo.scheduledTime.substr(11, 5) + ' to ' + this.props.service.destinationList[0].crs}>
-          <Arrow />
+        <ButtonWrapper onClick = {() => this.props.handleClickOnService(this.props.service.serviceIdentifier)}>
+          <Arrow role='img'arial-label={'Click here for the ' + this.props.service.scheduledInfo.scheduledTime.substr(11, 5) + ' to ' + this.props.service.destinationList[0].crs}/>
         </ButtonWrapper>
       </TrainWrapper>
     );

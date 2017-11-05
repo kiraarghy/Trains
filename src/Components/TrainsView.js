@@ -6,16 +6,20 @@ import TrainContainer from "./TrainContainer";
 const ServicesWrapper = styled.div`padding: 3%;`;
 
 class TrainsView extends Component {
+  trainServices = this.props.services.map(service => {
+    if (service.transportMode !== "TRAIN") {
+      return null;
+    }
+    return (
+      <TrainContainer
+        key={service.serviceIdentifier}
+        service={service}
+        handleClickOnService={this.props.handleClickOnService}
+      />
+    );
+  });
   render() {
-    var trainServices = this.props.services.map(service => {
-      if (service.transportMode !== "TRAIN") {
-        return null;
-      }
-      return (
-        <TrainContainer key={service.serviceIdentifier} service={service} handleClickOnService={this.props.handleClickOnService}/>
-      );
-    });
-    return <ServicesWrapper>{trainServices}</ServicesWrapper>;
+    return <ServicesWrapper>{this.trainServices}</ServicesWrapper>;
   }
 }
 
