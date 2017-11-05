@@ -1,6 +1,9 @@
 import React, { Component } from "react";
+import styled from "styled-components";
 
 import TrainContainer from './TrainContainer'
+
+const ServicesWrapper = styled.div`padding: 3%;`
 
 class TrainsView extends Component {
   render() {
@@ -12,7 +15,7 @@ class TrainsView extends Component {
         );
       }
     );
-    return <div>{trainServices}</div>;
+    return <ServicesWrapper>{trainServices}</ServicesWrapper>;
   }
 }
 
