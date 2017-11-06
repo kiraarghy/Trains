@@ -23,6 +23,7 @@ const ButtonWrapper = styled.button`
   flex: 1;
   background-color: white;
   border-width: 0px;
+  cursor: pointer;
 `;
 const Arrow = styled.div`
   height: 15px;

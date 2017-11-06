@@ -15,6 +15,7 @@ class TrainsView extends Component {
         key={service.serviceIdentifier}
         service={service}
         handleClickOnService={this.props.handleClickOnService}
+        aria-hidden={this.props.TrainsViewActive? false : true}
       />
     );
   });

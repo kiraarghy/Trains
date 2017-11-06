@@ -7,6 +7,7 @@ import JourneyView from "./JourneyView";
 const AppWrapper = styled.div`
   font-family: "Roboto", sans-serif;
   background-color: LightGray;
+  width: 100%
 `;
 
 const TrainViewWrapper = styled.div`
@@ -17,7 +18,7 @@ const TrainViewWrapper = styled.div`
 `;
 const JourneyViewWrapper = styled.div`
   position: fixed;
-  transform: translateX(${props => (props.TrainsViewActive ? "-100%" : "0%")});
+  transform: translateX(${props => (props.TrainsViewActive ? "100%" : "0%")});
   width: 100%;
   transition: transform 300ms ease-in;
 `;
@@ -54,13 +55,12 @@ class TrainlineApp extends Component {
   };
 
   apiJourneyRefreshDispatcher = () => {
-    setTimeout(this.apiJourneyRefresh, 8000);
+    setTimeout(this.apiJourneyRefresh, 30000);
     return null;
   };
 
   apiJourneyRefresh = () => {
     if (this.state.currentlySelectedService !== "") {
-      console.log("orange");
       let urlForJourneyAPICall =
         "https://realtime.thetrainline.com/callingPattern/" +
         this.state.currentlySelectedService +
@@ -97,12 +97,14 @@ class TrainlineApp extends Component {
           <JourneyView
             journeyData={this.state.journeyData}
             handleCloseJourneyView={this.handleCloseJourneyView}
+            TrainsViewActive={this.state.TrainsViewActive}
           />
         </JourneyViewWrapper>
         <TrainViewWrapper TrainsViewActive={this.state.TrainsViewActive}>
           <TrainsView
             services={this.state.watTrainData.services}
             handleClickOnService={this.handleClickOnService}
+            TrainsViewActive={this.state.TrainsViewActive}
           />
         </TrainViewWrapper>
         {this.apiServiceRefreshDispatcher()}
