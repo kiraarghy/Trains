@@ -64,7 +64,7 @@ class TrainlineApp extends Component {
       let urlForJourneyAPICall =
         "https://realtime.thetrainline.com/callingPattern/" +
         this.state.currentlySelectedService +
-        "/2017-11-05";
+        "/2017-11-06";
       fetch(urlForJourneyAPICall)
         .then(output => output.json())
         .then(output => {
